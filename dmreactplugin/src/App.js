@@ -1,42 +1,21 @@
-<<<<<<< HEAD
-
-import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-
-=======
-import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
->>>>>>> upstream/dev
+import React from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 // Import all Global CSS components
-import 'bootstrap/dist/css/bootstrap.min.css';
-import '../src/assets/css/global.module.css';
+import "bootstrap/dist/css/bootstrap.min.css";
+import "../src/assets/css/global.module.css";
 
 // Import all Router components
-<<<<<<< HEAD
-import ChatHome from "./pages/chathome";
-
+import ChatHome from "./pages/newChatRoom";
 
 const App = () => {
-   return (
-     <Router basename='/dm'>
-           <Switch>
-             <Route exact path='/' component={ChatHome} />
-            </Switch>
-
+  return (
+    <Router basename="/dm">
+      <Switch>
+        <Route exact path="/" component={ChatHome} />
+      </Switch>
+    </Router>
   );
-=======
-import ChatHome from './pages/newChatRoom';
-
-const App = () => {
-    return (
-        <Router basename='/dm'>
-            <Switch>
-                <Route exact path='/' component={ChatHome} />
-            </Switch>
-        </Router>
-    );
->>>>>>> upstream/dev
 };
 
 export default App;

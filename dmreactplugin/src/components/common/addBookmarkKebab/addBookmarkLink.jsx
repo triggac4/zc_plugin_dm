@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import ModalButton from "../pinnedMessage/button";
@@ -6,9 +6,14 @@ import Close from "../../../assets/img/svg/close.svg";
 import TextField from "./textField";
 import AddBookmarkModal from "./addBookmarkModal";
 import NameTextField from "./nameLinkTextField";
-const AddBookmarkLink = () => {
-  const [closed, setClose] = useState(true);
+const AddBookmarkLink = ({ opened, onClose }) => {
+  const [closed, setClose] = useState(opened);
   const [isLink, setIsLink] = useState(false);
+  useEffect(() => {
+    if (opened) {
+      setClose(opened);
+    }
+  }, [opened]);
 
   const Button = (
     <>

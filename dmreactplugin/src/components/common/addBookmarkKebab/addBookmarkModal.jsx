@@ -1,12 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const AddBookmarkModal = ({ close, children }) => {
-  const [show, setShow] = useState(true);
-  if (close) {
-  } else {
-    setShow(close);
-  }
+  const [show, setShow] = useState(close);
+  useEffect(() => {
+    if (close && !show) {
+      setShow(close);
+    } else if (!close && show) {
+      setShow(close);
+    }
+  }, [close, show]);
+
   return (
     <div
       role="presentation"

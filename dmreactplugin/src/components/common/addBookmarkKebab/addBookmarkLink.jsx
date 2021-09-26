@@ -45,7 +45,11 @@ const AddBookmarkLink = ({ opened, onClose }) => {
       >
         <div
           className="d-flex justify-content-between text-capitalize align-items-center"
-          style={{ fontSize: "30px", fontWeight: "700", height: "20px" }}
+          style={{
+            fontSize: "30px",
+            fontWeight: "700",
+            height: "20px",
+          }}
         >
           <div className="writeUp">Add a Bookmark</div>
           <img

@@ -35,19 +35,21 @@ const StyledImgCover = styled.div`
 
 const HoverAddBookmark = () => {
   let [open, setOpen] = useState(false);
+  let openModal = () => {
+    setOpen(true);
+  };
+  let closeModal = () => {
+    setOpen(false);
+  };
   return (
     <>
-      <StyledDiv
-        onClick={() => {
-          setOpen(true);
-        }}
-      >
+      <StyledDiv onClick={openModal}>
         <StyledImgCover>
           <StyledImg src={link} alt="link" />
         </StyledImgCover>
         <h6 className="mb-0 pb-0">Add a bookmark</h6>
         <div className="mb-0 pb-0">Easily find your teams important links</div>
-        <AddBookmarkLink opened={open} />
+        <AddBookmarkLink opened={open} onClose={closeModal} />
       </StyledDiv>
     </>
   );

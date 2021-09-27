@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
 
-const AddBookmarkModal = ({ close, children }) => {
+const AddBookmarkModal = ({ close, children, onClose }) => {
   const [show, setShow] = useState(close);
   useEffect(() => {
-    if (close && !show) {
+    if (!close && show) {
       setShow(close);
-    } else if (!close && show) {
+      onClose();
+    } else {
       setShow(close);
     }
   }, [close, show]);
@@ -15,7 +15,7 @@ const AddBookmarkModal = ({ close, children }) => {
     <div
       role="presentation"
       onClick={() => {
-        setShow(false);
+        onClose();
       }}
       className={`${
         show ? "d-flex" : "d-none"

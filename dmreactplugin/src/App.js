@@ -16,6 +16,9 @@ const App = () => {
       <Switch>
         <Route exact path="/" component={ChatHome} />
       </Switch>
+      <Switch>
+        <Route exact path="/hover" component={HoverAddBookmark} />
+      </Switch>
     </Router>
   );
 };

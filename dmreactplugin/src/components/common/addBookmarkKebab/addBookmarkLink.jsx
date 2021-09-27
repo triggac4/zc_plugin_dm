@@ -6,6 +6,7 @@ import Close from "../../../assets/img/svg/close.svg";
 import TextField from "./textField";
 import AddBookmarkModal from "./addBookmarkModal";
 import NameTextField from "./nameLinkTextField";
+
 const AddBookmarkLink = ({ opened, onClose }) => {
   const [closed, setClose] = useState(opened);
   const [isLink, setIsLink] = useState(false);
@@ -14,12 +15,21 @@ const AddBookmarkLink = ({ opened, onClose }) => {
       setClose(opened);
     }
   }, [opened]);
-
+  let onClosed = () => {
+    setClose(false);
+    onClose();
+  };
   const Button = (
     <>
       <NameTextField label="Name" placeholder="Name" />
       <div className="d-flex justify-content-end">
-        <ModalButton onClick={() => setClose(false)} close>
+        <ModalButton
+          onClick={() => {
+            setClose(false);
+            onClose();
+          }}
+          close
+        >
           Cancel
         </ModalButton>
         <ModalButton>Add</ModalButton>
@@ -35,7 +45,7 @@ const AddBookmarkLink = ({ opened, onClose }) => {
     setIsLink(isUrl);
   };
   return (
-    <AddBookmarkModal close={closed}>
+    <AddBookmarkModal onClose={onClosed} close={closed}>
       <div
         className="d-flex flex-column p-4 w-50 gap-3 bg-white rounded-1"
         role="presentation"
@@ -57,7 +67,10 @@ const AddBookmarkLink = ({ opened, onClose }) => {
             alt="close"
             className="d-block h-75"
             role="presentation"
-            onClick={() => setClose(false)}
+            onClick={() => {
+              setClose(false);
+              onClose();
+            }}
           />
         </div>
         <div>

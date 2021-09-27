@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import link from "../../../assets/img/svg/link.svg";
-import AddBookmarkLink from "./addBookmarkLink";
+import AddBookmarkLink from "./modal/addBookmarkLink";
 
 const StyledDiv = styled.div`
   padding: 10px;
@@ -33,7 +33,7 @@ const StyledImgCover = styled.div`
   padding: 5px;
 `;
 
-const HoverAddBookmark = () => {
+const AddBookmarkDropDown = () => {
   let [open, setOpen] = useState(false);
   let openModal = () => {
     setOpen(true);
@@ -55,4 +55,4 @@ const HoverAddBookmark = () => {
   );
 };
 
-export default HoverAddBookmark;
+export default AddBookmarkDropDown;

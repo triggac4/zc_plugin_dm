@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
 
-import ModalButton from "../pinnedMessage/button";
-import Close from "../../../assets/img/svg/close.svg";
-import TextField from "./textField";
+import ModalButton from "../../pinnedMessage/button";
+import Close from "../../../../assets/img/svg/close.svg";
+import TextField from "../modalTextFields/textField";
 import AddBookmarkModal from "./addBookmarkModal";
-import NameTextField from "./nameLinkTextField";
+import NameTextField from "../modalTextFields/nameLinkTextField";
 
 const AddBookmarkLink = ({ opened, onClose }) => {
   const [closed, setClose] = useState(opened);

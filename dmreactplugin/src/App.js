@@ -8,16 +8,11 @@ import "../src/assets/css/global.module.css";
 // Import all Router components
 import ChatHome from "./pages/newChatRoom";
 
-import dmSingleMessageContainer from "./components/dmSingleMessageContainer";
-import HoverAddBookmark from "./components/common/addBookmarkKebab/hoverAddBookmark";
 const App = () => {
   return (
     <Router basename="/dm">
       <Switch>
         <Route exact path="/" component={ChatHome} />
-      </Switch>
-      <Switch>
-        <Route exact path="/hover" component={HoverAddBookmark} />
       </Switch>
     </Router>
   );

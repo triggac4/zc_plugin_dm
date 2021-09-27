@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-import link from "../../../assets/img/svg/link.svg";
+import link from "../../../../assets/img/svg/link.svg";
+
 const StyledTextField = styled.input`
   border: none;
   outline: none;

@@ -4,6 +4,7 @@ import BookmarkHeader from '../components/common/addBookmarkKebab/dmBookMark'
 import DmChatContainerBox from '../components/ChatContainer/dmChatContainerBox'
 import InputBoxField from '../components/dmBoxInputField'
 import PinnedMessage from '../components/common/pinnedMessage/dmPinnedMessages'
+import instance from '../utils/apiServices'
 import { useDispatch } from 'react-redux'
 import {
   handleGetRoomInfo,
@@ -12,9 +13,14 @@ import {
 import { useSelector } from 'react-redux'
 import './newChatRoom.css'
 import ProfileSidebar from '../components/profileSidebar/profileSidebar'
+import ABookmark from '../components/common/addBookmarkKebab/ABookmark'
 
 // Chat Home Page
 const ChatHome = ({ org_id, loggedInUser_id, room_id }) => {
+  const [grid, setGrid] = useState('')
+  const [none, setNone] = useState('none')
+  const [bookmarks, setBookmarks] = useState([])
+
   const roomsReducer = useSelector(({ roomsReducer }) => roomsReducer)
   const membersReducer = useSelector(({ membersReducer }) => membersReducer)
 
@@ -23,17 +29,32 @@ const ChatHome = ({ org_id, loggedInUser_id, room_id }) => {
     roomsReducer?.room_info?.room_user_ids[1]
 
   const dispatch = useDispatch()
-
+  const apiInstance = instance
   useEffect(() => {
     dispatch(handleGetRoomMessages(org_id, room_id))
     dispatch(handleGetRoomInfo(org_id, room_id))
   }, [dispatch, org_id, loggedInUser_id, room_id])
 
+  useEffect(() => {
+    async function getBookmarks() {
+      try {
+        const response = await apiInstance.bookmark(org_id, room_id, 'get', {})
+
+        if (response.status <= 200 && response.status <= 299) {
+          setBookmarks(response.data)
+        }
+      } catch (e) {
+        console.log(e)
+      }
+    }
+    getBookmarks()
+  }, [org_id, room_id])
+
   const actualUser = membersReducer?.find((member) => member._id === user2_id)
 
-  const [grid, setGrid] = useState('')
-  const [none, setNone] = useState('none')
-
+  const bookmark = bookmarks.map((item, index) => {
+    return <ABookmark {...item} key={index} />
+  })
   return (
     <div className='dm-plugin-full-page' style={{ display: grid }}>
       <div className='dm-newchat-room'>
@@ -49,6 +70,7 @@ const ChatHome = ({ org_id, loggedInUser_id, room_id }) => {
           <div className='dm-bookmark-head'>
             <div className='add-bookmark gap-2 d-flex flex-direction-column flex-flow align-items-center px-3 py-1'>
               <PinnedMessage room_id={room_id} actualUser={actualUser} />
+              {bookmark}
               <BookmarkHeader />
             </div>
           </div>

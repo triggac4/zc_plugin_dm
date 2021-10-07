@@ -1,7 +1,7 @@
-import React, { useState, useRef } from "react";
-import { BiPlus } from "react-icons/bi";
-import "./dmBookmarkStyle.css";
-import AddBookmarkDropDown from "./dmBookmarkDropDown";
+import React, { useState, useRef } from 'react'
+import { BiPlus } from 'react-icons/bi'
+import './dmBookmarkStyle.css'
+import AddBookmarkDropDown from './dmBookmarkDropDown'
 {
   /* <div className='addBookmark-overlay'>
                 <div className='container mx-auto pt-3 pb-3 addBookmark'>
@@ -23,46 +23,45 @@ import AddBookmarkDropDown from "./dmBookmarkDropDown";
 }
 
 const DmBookMarkHeader = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const HoverOutStop = useRef(false);
+  const [isOpen, setIsOpen] = useState(false)
+  const HoverOutStop = useRef(false)
   const onHoverMouseOut = () => {
     if (HoverOutStop.current) {
     } else {
-      setIsOpen(false);
+      setIsOpen(false)
     }
-  };
+  }
+
   return (
     <>
       <button
-        className="position-relative btn btn-add-bookmark d-flex align-items"
+        className='position-relative btn btn-add-bookmark d-flex align-items'
         onClick={() => {
-          setIsOpen(!isOpen);
+          setIsOpen(!isOpen)
         }}
         onMouseLeave={onHoverMouseOut}
       >
         <BiPlus />
-        <p className="m-0">Add a bookmark</p>
+        <p className='m-0'>Add a bookmarks</p>
         {isOpen ? (
           <div
-            className="position-absolute bg-white shadow-sm p-3 dropDown-zindex d-flex flex-column gap-2"
-            style={{ width: "400px", top: "100%", left: "0" }}
+            className='position-absolute bg-white shadow-sm p-3 dropDown-zindex d-flex flex-column gap-2'
+            style={{ width: '400px', top: '100%', left: '0' }}
             aria-hidden
             onClick={(e) => {
-              e.stopPropagation();
+              e.stopPropagation()
             }}
           >
             <AddBookmarkDropDown
               onOpenModal={(value) => {
-                HoverOutStop.current = value;
+                HoverOutStop.current = value
               }}
             />
-            <div className="border-bottom border-secondary"></div>
-            <p className="pl-3 text-start">No recent links</p>
           </div>
         ) : null}
       </button>
     </>
-  );
-};
+  )
+}
 
-export default DmBookMarkHeader;
+export default DmBookMarkHeader

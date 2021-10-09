@@ -103,6 +103,7 @@ const ABookmark = ({ link, name, createdAt }) => {
           opened={isModal}
           onClose={() => {
             setModal(false)
+            setIsOpen(false)
           }}
           name={name}
         />

@@ -32,6 +32,9 @@ const DmBookMarkHeader = () => {
     }
   }
 
+  const onModalClose = () => {
+    setIsOpen(false)
+  }
   return (
     <>
       <button
@@ -56,6 +59,7 @@ const DmBookMarkHeader = () => {
               onOpenModal={(value) => {
                 HoverOutStop.current = value
               }}
+              onModalClose={onModalClose}
             />
           </div>
         ) : null}

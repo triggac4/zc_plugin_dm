@@ -34,7 +34,7 @@ const StyledImgCover = styled.div`
   padding: 5px;
 `
 
-const AddBookmarkDropDown = ({ onOpenModal }) => {
+const AddBookmarkDropDown = ({ onOpenModal, onModalClose }) => {
   const [open, setOpen] = useState(false)
   const [linkComp, setLinks] = useState([])
   const [loading, setLoading] = useState('loading...')
@@ -48,6 +48,7 @@ const AddBookmarkDropDown = ({ onOpenModal }) => {
   let closeModal = () => {
     setOpen(false)
     onOpenModal(false)
+    onModalClose()
   }
   const apiInstance = instance
   let [org_id, room_id, loggedInUser_id] = location.pathname
@@ -61,7 +62,7 @@ const AddBookmarkDropDown = ({ onOpenModal }) => {
 
         if (response.status == 200) {
           let links = response.data.links
-          setLinks(['www.facebook.com'])
+          setLinks(links)
           setLoading('No recent links')
         }
       } catch (e) {
@@ -71,14 +72,36 @@ const AddBookmarkDropDown = ({ onOpenModal }) => {
     getLinks()
   }, [org_id, room_id])
 
+  const timeConvert = (time) => {
+    const timeStamp = new Date(time).toDateString()
+    const today = new Date().toDateString()
+    const yesterday = new Date()
+    yesterday.setDate(yesterday.getDate - 1)
+    let isToday = false
+    let isYesterday = false
+    if (timeStamp === today) {
+      isToday = true
+    } else if (timeStamp == yesterday) {
+      isYesterday = true
+    }
+    if (isToday) {
+      return 'today ' + timeStamp
+    } else if (isYesterday) {
+      return 'yesterday ' + timeStamp
+    }
+    return timeStamp
+  }
   const linkComponents = linkComp.map((urls, index) => {
+    console.log(urls.timestamp)
+    console.log(urls)
+    const date = timeConvert(urls.timestamp)
     return (
-      <StyledDiv key={index} onClick={() => openModal(urls)}>
+      <StyledDiv key={index} onClick={() => openModal(urls.link)}>
         <StyledImgCover>
           <StyledImg src={link} alt='link' />
         </StyledImgCover>
-        <h6 className='mb-0 pb-0'>{urls}</h6>
-        <div className='mb-0 pb-0'>you 14:16AM</div>
+        <h6 className='mb-0 pb-0'>{urls.link}</h6>
+        <div className='mb-0 pb-0'>{date}</div>
       </StyledDiv>
     )
   })

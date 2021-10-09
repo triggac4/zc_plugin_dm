@@ -45,7 +45,7 @@ const DmBookMarkHeader = () => {
         <p className='m-0'>Add a bookmarks</p>
         {isOpen ? (
           <div
-            className='position-absolute bg-white shadow-sm p-3 dropDown-zindex d-flex flex-column gap-2'
+            className='position-absolute bg-white shadow p-3 dropDown-zindex d-flex flex-column gap-2'
             style={{ width: '400px', top: '100%', left: '0' }}
             aria-hidden
             onClick={(e) => {

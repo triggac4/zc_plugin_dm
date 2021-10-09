@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react'
+
 import DmProfileHeader from '../components/dmProfileHeader'
 import BookmarkHeader from '../components/common/addBookmarkKebab/dmBookMark'
 import DmChatContainerBox from '../components/ChatContainer/dmChatContainerBox'
@@ -30,25 +31,23 @@ const ChatHome = ({ org_id, loggedInUser_id, room_id }) => {
 
   const dispatch = useDispatch()
   const apiInstance = instance
+
+  async function getBookmarks() {
+    try {
+      const response = await apiInstance.bookmark(org_id, room_id, 'get', {})
+
+      if (response.status <= 200 && response.status <= 299) {
+        setBookmarks(response.data)
+      }
+    } catch (e) {
+      console.log(e)
+    }
+  }
   useEffect(() => {
     dispatch(handleGetRoomMessages(org_id, room_id))
     dispatch(handleGetRoomInfo(org_id, room_id))
-  }, [dispatch, org_id, loggedInUser_id, room_id])
-
-  useEffect(() => {
-    async function getBookmarks() {
-      try {
-        const response = await apiInstance.bookmark(org_id, room_id, 'get', {})
-
-        if (response.status <= 200 && response.status <= 299) {
-          setBookmarks(response.data)
-        }
-      } catch (e) {
-        console.log(e)
-      }
-    }
     getBookmarks()
-  }, [org_id, room_id])
+  }, [dispatch, org_id, loggedInUser_id, room_id])
 
   const actualUser = membersReducer?.find((member) => member._id === user2_id)
 
@@ -71,7 +70,10 @@ const ChatHome = ({ org_id, loggedInUser_id, room_id }) => {
             <div className='add-bookmark gap-2 d-flex flex-direction-column flex-flow align-items-center px-3 py-1'>
               <PinnedMessage room_id={room_id} actualUser={actualUser} />
               {bookmark}
-              <BookmarkHeader />
+              <BookmarkHeader
+                ref={(ref) => (this.fooRef = ref)}
+                data-tip='add bookmark'
+              />
             </div>
           </div>
         </div>

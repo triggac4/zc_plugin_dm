@@ -49,7 +49,7 @@ const ChatHome = ({ org_id, loggedInUser_id, room_id }) => {
     dispatch(handleGetRoomMessages(org_id, room_id))
     dispatch(handleGetRoomInfo(org_id, room_id))
     getBookmarks()
-  }, [dispatch, org_id, loggedInUser_id, room_id, messages])
+  }, [dispatch, org_id, loggedInUser_id, room_id])
 
   const actualUser = membersReducer?.find((member) => member._id === user2_id)
 

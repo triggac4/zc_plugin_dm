@@ -52,6 +52,7 @@ const DeleteBookmark = ({ opened, onClose, name }) => {
     } catch (e) {
       setDisabled(false)
       console.log(e)
+      setError(true)
     }
   }
 

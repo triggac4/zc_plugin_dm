@@ -62,6 +62,7 @@ const AddBookmarkLink = ({ opened, onClose, initialLink }) => {
       setDisabled(false)
     } catch (e) {
       setDisabled(false)
+      setError(true)
       console.log(e)
     }
   }
